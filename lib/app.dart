@@ -8,11 +8,26 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color primaryColor = const Color(0xFF041123);
+    final Color primaryColor =
+        Colors.transparent; // was color const Color(0xFF041123)
     return BlocProvider(
       create: (context) => ReminderCubit(),
+
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: (context, child) {
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/images/main_background.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child ?? const SizedBox.shrink(),
+            ],
+          );
+        },
         theme: ThemeData(
           scaffoldBackgroundColor: primaryColor,
           appBarTheme: AppBarTheme(backgroundColor: primaryColor),
